@@ -42,9 +42,9 @@ class App extends React.Component {
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-    <Provider store={props.store}>
+    <Provider store={store}>
         <App />
     </Provider>, rootElement
 );
 
-store.dispatch(getAllBooks());
+// store.dispatch(getAllBooks());

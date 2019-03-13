@@ -3,10 +3,15 @@ import { connect } from 'react-redux';
 import SortOptions from './SortOptions';
 import BooksList from './BooksList';
 import Pagination from './Pagination';
+import { getAllBooks } from './Home.actions';
 
 class HomeContainer extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(getAllBooks());
     }
 
     render() {

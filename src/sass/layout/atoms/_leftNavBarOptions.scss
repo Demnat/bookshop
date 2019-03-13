@@ -1,0 +1,15 @@
+.leftNavBarOptions {
+    width: 100%;
+    display: block;
+    font: $leftNavBarOptionsFont;
+    color: $mainMenuColor;
+    text-decoration: none;
+
+    &:hover, &:active, .active {
+        color: $logoLinkColor;
+    }
+
+    @include media ('>phone','<oldDesktop') {
+        padding: 0 10px;   
+    }
+}

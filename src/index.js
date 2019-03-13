@@ -1,12 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { MainLayout } from './modules/MainLayout/MainLayout';
+import Home from './modules/Home/HomeContainer';
+import Product from './modules/Product/Product';
+import FAQ from './components/FAQ';
+import Rules from './components/Rules';
+import Contact from './components/Contact';
+import Cart from './modules/Cart/Cart';
+import NotFound from './components/NotFound';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import './sass/style.scss';
+
+import store from './store';
+import { Provider } from 'react-redux';
+import { getAllBooks } from './modules/Home/Home.actions';
+
+class App extends React.Component {
+
+    render() {
+        return (
+
+            <BrowserRouter>
+                <MainLayout>
+                    <Switch>
+                        <Route exact path={'/'} component={Home} />
+                        <Route exact path={'/product/:bookId'} component={Product} />
+                        <Route exact path={'/faq'} component={FAQ} />
+                        <Route exact path={'/rules'} component={Rules} />
+                        <Route exact path={'/contact'} component={Contact} />
+                        <Route exact path={'/cart'} component={Cart} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </MainLayout>
+            </BrowserRouter>
+
+        );
+    }
+}
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(
+    <Provider store={props.store}>
+        <App />
+    </Provider>, rootElement
+);
+
+store.dispatch(getAllBooks());

@@ -15,7 +15,7 @@ class HomeContainer extends Component {
     }
 
     render() {
-        console.log(props);
+        // console.log("home container", this.props.books.books);
         return (
             <section className="container homeSection" id="homeSection">
                 <div className="row">
@@ -25,7 +25,7 @@ class HomeContainer extends Component {
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10">
-                        <BooksList books={props.books}/>
+                        <BooksList books={this.props.books}/>
                         <Pagination />
                     </div>
                 </div>
@@ -36,7 +36,7 @@ class HomeContainer extends Component {
 
 const mapStateToProps = function (store) {
     return {
-        books: store.books
+        books: store.books.books
     };
 };
 

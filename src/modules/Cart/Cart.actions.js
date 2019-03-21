@@ -1,0 +1,11 @@
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const INCREASE_AMOUNT_OF_BOOK = 'INCREASE_AMOUNT_OF_BOOK';
+export const REDUCE_AMOUNT_OF_BOOK = 'REDUCE_AMOUNT_OF_BOOK';
+export const REDUCE_AMOUNT_OF_BOOK = 'REDUCE_AMOUNT_OF_BOOK';
+export const TOTAL_CART = 'TOTAL_CART';
+
+
+//w dalszej kolejności
+export const ADD_DISCOUNT = 'ADD_DISCOUNT';
+

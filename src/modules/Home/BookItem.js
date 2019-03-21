@@ -2,12 +2,13 @@ import React from 'react';
 import Price from './Price';
 import { Link } from 'react-router-dom';
 
-const BookItem = (book) => (
+const BookItem = ({book}) => (
+    
     <div className={'homeBook'}>
         { 
             book.tag !== "" && <span className={'token'}>{book.tag}</span>
         }
-        <Link to="/product/:id" className={'bookContainer'}>
+        <Link to={'/product/' + book.id} className={'bookContainer'}>
             <img className={'book'}
                     src={book.imageCover}
                     alt={book.title} />

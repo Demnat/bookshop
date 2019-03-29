@@ -32,13 +32,13 @@ function getItemById(arr, id) {
     return item;
 }
 
-function increaseAmount(item,i) {
-    item.bookAmount +=i;
+function increaseAmount(item, i) {
+    item.bookAmount += i;
     return item;
 }
 
 function reduceAmount(item,i) {
-    item.bookAmount-=i;
+    item.bookAmount -= i;
     return item;
 }
 
@@ -73,6 +73,7 @@ const CartReducer = function (state = initialState, action) {
     switch (action.type) {
 
         case GET_ALL_PRODUCTS_IN_CART:
+            console.log(state);
             return {...state, products: state.products};
 
         case ADD_TO_CART:
@@ -81,7 +82,7 @@ const CartReducer = function (state = initialState, action) {
             if (isInCart(item, action.book.id)) {
                 item = increaseAmount(item,1);
                 item = countItemPrice(item);
-                const index = newState.products.findIndex(f => f.book.id == action.book.id);
+                const index = newState.products.findIndex(f => f.book.id === action.book.id);
                 newState.products[index] = item;   
             } else 
                 newState = { ...newState, products: addNewItem(newState.products, action.book) }

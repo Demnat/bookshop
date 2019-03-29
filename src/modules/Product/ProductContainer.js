@@ -25,7 +25,7 @@ class ProductContainer extends Component {
 
     render() {
         return (
-            <Product selectedBook={this.props.selectedBook} addItemToCart={this.props.addToCart} />
+            <Product selectedBook={this.props.selectedBook} addItemToCart={this.addItemToCart} />
         )
     }
 }

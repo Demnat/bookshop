@@ -16,25 +16,44 @@ class CartContainer extends Component {
         this.props.getAllProductsInCart();
     }
 
-    
+
 
     render() {
         return (
             <section className="container cartSection">
                 <h6 className="leftNavBarHeader cartSection-header">Koszyk</h6>
                 {console.log(this.props.products.length)}
-                {
-                    this.props.products.length === 0 ?
+                
+                    {/* {(() => {if (this.props.products.length === 0){
+                     return(   <h4 className="bookTitle">Koszyk jest pusty!
+                            <Link exact to="/" className="bookTitle" >
+                                Wróć do zakupów
+                            </Link>
+                        </h4>)
+                    } else {
+                        return(
+                            <div className="container">
+                                <CartProductsList products={this.props.products} /> 
+                                <CartSummary summary={this.props.summary} />
+                            </div>
+                        )
+                    }
+                    })()} */}
+                        
+                    {this.props.products.length === 0 ?
                         <h4 className="bookTitle">Koszyk jest pusty!
                             <Link exact to="/" className="bookTitle" >
                                 Wróć do zakupów
                             </Link>
                         </h4>
                         :
-                        <CartProductsList products={this.props.products} /> &&
-                        <CartSummary summary={this.props.summary} />
-                }
-            </section>
+                        <div > 
+                            <CartProductsList products={this.props.products} /> 
+                            <CartSummary summary={this.props.summary} />
+                        </div>
+                    }
+
+                </section>
         )
     }
 }

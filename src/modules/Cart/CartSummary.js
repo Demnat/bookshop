@@ -9,7 +9,7 @@ const CartSummary = (summary) => {
                 <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                     <form className="discount">
                         <h4 className="bookTitle">Kod rabatowy:</h4>
-                        <input type="text" class="discountCode" />
+                        <input type="text" className="discountCode" />
                         <button className="discountButton" type="submit">Zastosuj</button>
                     </form>
                 </div>

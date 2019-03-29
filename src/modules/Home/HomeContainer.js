@@ -15,7 +15,6 @@ class HomeContainer extends Component {
     }
 
     render() {
-        // console.log("home container", this.props.books.books);
         return (
             <section className="container homeSection" id="homeSection">
                 <div className="row">

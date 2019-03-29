@@ -2,7 +2,6 @@ import React from 'react';
 import BookItem from './BookItem';
 
 const BooksList = ({books}) => {
-
     return (
     <div className="container homeSection-booksContainer">
         {

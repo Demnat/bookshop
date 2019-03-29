@@ -4,12 +4,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { MainLayout } from './modules/MainLayout/MainLayout';
 import Home from './modules/Home/HomeContainer';
-import Product from './modules/Product/Product';
+// import Product from './modules/Product/Product';
 import ProductContainer from './modules/Product/ProductContainer';
 import FAQ from './components/FAQ';
 import Rules from './components/Rules';
 import Contact from './components/Contact';
-import Cart from './modules/Cart/Cart';
+import CartContainer from './modules/Cart/CartContainer';
 import NotFound from './components/NotFound';
 
 import './sass/style.scss';
@@ -32,7 +32,7 @@ class App extends React.Component {
                         <Route exact path={'/faq'} component={FAQ} />
                         <Route exact path={'/rules'} component={Rules} />
                         <Route exact path={'/contact'} component={Contact} />
-                        <Route exact path={'/cart'} component={Cart} />
+                        <Route exact path={'/cart'} component={CartContainer} />
                         <Route path='*' component={NotFound} />
                     </Switch>
                 </MainLayout>

@@ -5,13 +5,13 @@ import { combineReducers } from 'redux';
 
 // Import Reducers
 import books from './modules/Home/HomeReducer';
-// import cart from './modules/Cart/CartReducer';
+import CartReducer from './modules/Cart/CartReducer';
 
 
 // Combine all reducers into one root reducer
 const reducer = combineReducers({
     books,
-    // cart,
+    CartReducer,
 });
 
 export default reducer;

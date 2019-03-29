@@ -2,16 +2,10 @@ import { GET_ALL_BOOKS, GET_BOOK } from './Home.actions';
 import booksData from '../../data/books.json';
 
 const initialState = {
+    
     books: booksData,
     selectedBook: {}
-    // cart: {
-    //     products: [],
-    //     summary: {
-    //         cena: 0,
-    //         amountBooks: 0,
-    //         discount: 0
-    //     }
-    // }
+
 };
 
 function getBookById(arr, id) {

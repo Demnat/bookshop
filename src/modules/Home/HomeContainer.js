@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SortOptions from './SortOptions';
 import BooksList from './BooksList';
 import Pagination from './Pagination';
-import { getAllBooks } from './Home.actions';
+import * as homeActions from './Home.actions';
 
 class HomeContainer extends Component {
     constructor(props) {
@@ -11,7 +11,11 @@ class HomeContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(getAllBooks());
+        this.props.getAllBooks();
+    }
+
+    sort = (sortBy, sortDirection) => {
+        this.props.sortBooks(sortBy, sortDirection);
     }
 
     render() {
@@ -20,7 +24,7 @@ class HomeContainer extends Component {
                 <div className="row">
                     <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2">
                         <div className="leftNavBar">
-                            <SortOptions />
+                            <SortOptions sort={this.sort} />
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10">
@@ -39,4 +43,11 @@ const mapStateToProps = function (store) {
     };
 };
 
-export default connect(mapStateToProps)(HomeContainer);
+const mapDispatchToProps = {
+    ...homeActions
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomeContainer);

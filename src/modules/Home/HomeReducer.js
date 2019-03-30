@@ -1,6 +1,6 @@
-import { GET_ALL_BOOKS, GET_BOOK } from './Home.actions';
+import { GET_ALL_BOOKS, GET_BOOK, SORT_BOOKS } from './Home.actions';
 import booksData from '../../data/books.json';
-
+import {SORT_ASC, SORT_TITLE} from '../../data/variables.js';
 const initialState = {
     
     books: booksData,
@@ -13,17 +13,52 @@ function getBookById(arr, id) {
     return selectedBook;
 }
 
+function compareStringsAsc(a, b) {
+    return a.title.localeCompare(b.title,'pl');     
+}
+
+function compareStringsDesc(a, b) {
+    return b.title.localeCompare(a.title,'pl');
+}
+
+function sortByTitle(data, sortDirection) {
+    sortDirection === SORT_ASC 
+        ? data.sort(compareStringsAsc)
+        : data.sort(compareStringsDesc)
+    return data;
+}
+
+function comparePriceAsc(a, b) {
+    return a.price - b.price;
+}
+
+function comparePriceDesc(a, b) {
+    return b.price - a.price;
+}
+
+function sortByPrice(data, sortDirection) {
+    sortDirection === SORT_ASC 
+        ? data.sort(comparePriceAsc)
+        : data.sort(comparePriceDesc)
+    return data;
+}
+
 const books = function (state = initialState, action) {
     console.log(action);
     switch (action.type) {
 
         case GET_ALL_BOOKS:
-            // return Object.assign({}, state, {books: state.books})
             return {...state, books: state.books};
 
         case GET_BOOK: 
-            console.log('homereducer get book', getBookById(state.books, action.bookId))
             return {...state, selectedBook: getBookById(state.books, action.bookId)};
+
+        case SORT_BOOKS:
+            action.sortBy === SORT_TITLE 
+                ? state.books = sortByTitle(state.books, action.sortDirection)
+                : state.books = sortByPrice(state.books, action.sortDirection);
+            console.log("posortowaniu reducer", state.books);    
+            return {...state, books: state.books};
 
         default:
             return state;

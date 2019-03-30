@@ -98,7 +98,7 @@ const CartReducer = function (state = initialState, action) {
                 state.products[index] = changedItem;
                 state.summary.price = countSummaryPrice(state.products);
                 state.summary.totalPrice = state.summary.price + state.summary.postingPrice;
-                console.log("reducer po zmianie ilosci", state)
+                console.log("reducer po zmianie ilosci", state);
                 return {...state};
 
 

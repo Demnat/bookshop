@@ -16,10 +16,13 @@ const CartItem = (props) => {
             </div>
             <div className="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                 <div className="container amountItem">
-                    <input className="amount" type="number" min="1" max="999" value={props.itemAmount} />
+                    <input className="amount" type="number" min="1" max="999" 
+                        defaultValue={props.itemAmount} 
+                        onChange={(e) => props.changeAmountOfItem(props.item.id, Number(e.target.value))}
+                    />
                     <div className="amountButtons">
-                        <button className="amountButton">+</button>
-                        <button className="amountButton">-</button>
+                        <button className="amountButton" onClick={() => props.changeAmountOfItem(props.item.id, props.itemAmount + 1)}>+</button>
+                        <button className="amountButton" onClick={() => props.changeAmountOfItem(props.item.id, props.itemAmount - 1)}>-</button>
                     </div>
                 </div>
             </div>
@@ -29,7 +32,7 @@ const CartItem = (props) => {
             </div>
             <div className="col-sm-12 col-md-1 col-lg-1 col-xl-1">
                 {/* poprawić style z a na button */}
-                <button className="footerMenuLink"><i class="far fa-trash-alt removeProduct"></i></button>
+                <button className="footerMenuLink" onClick={() => props.removeItem(props.item.id)}><i className="far fa-trash-alt removeProduct"></i></button>
             </div>
         </div>
         

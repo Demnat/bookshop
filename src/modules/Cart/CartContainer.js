@@ -13,10 +13,16 @@ class CartContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllProductsInCart();
+        this.props.getDataCart();
     }
 
+    removeItemFromCart = itemId => {
+        this.props.removeFromCart(itemId);
+    }
 
+    changeAmountOfBooksInCart = (itemId, value) => {
+        this.props.changeAmountOfBooks(itemId, value);
+    }
 
     render() {
         return (
@@ -48,7 +54,11 @@ class CartContainer extends Component {
                         </h4>
                         :
                         <div > 
-                            <CartProductsList products={this.props.products} /> 
+                            <CartProductsList 
+                                products={this.props.products} 
+                                removeItemFromCart={this.removeItemFromCart}
+                                changeAmountOfBooksInCart={this.changeAmountOfBooksInCart} 
+                            /> 
                             <CartSummary summary={this.props.summary} />
                         </div>
                     }

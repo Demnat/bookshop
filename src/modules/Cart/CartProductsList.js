@@ -1,7 +1,7 @@
 import React from 'react';
 import CartItem from './CartItem';
 
-const CartProductsList = ({products}) => {
+const CartProductsList = (props) => {
     return (
 
         <div className="container">
@@ -20,7 +20,14 @@ const CartProductsList = ({products}) => {
                 </div>
             </div>   
             {
-                products.map(item => <CartItem key={item.book.id} item={item.book} itemAmount={item.bookAmount} itemsPrice={item.booksPrice} />)
+                props.products.map(item => <CartItem 
+                                                key={item.book.id} 
+                                                item={item.book} 
+                                                itemAmount={item.bookAmount} 
+                                                itemsPrice={item.booksPrice} 
+                                                removeItem={props.removeItemFromCart}
+                                                changeAmountOfItem={props.changeAmountOfBooksInCart} 
+                                            />)
             }
         </div>
 

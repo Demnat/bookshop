@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS_IN_CART, ADD_TO_CART } from './Cart.actions';
+import { GET_DATA_CART, ADD_TO_CART, REMOVE_FROM_CART, CHANGE_AMOUNT_OF_BOOKS } from './Cart.actions';
 
 
 const initialState = {
@@ -32,13 +32,9 @@ function getItemById(arr, id) {
     return item;
 }
 
-function increaseAmount(item, i) {
-    item.bookAmount += i;
-    return item;
-}
-
-function reduceAmount(item,i) {
-    item.bookAmount -= i;
+function changeAmount(item, newAmount) {
+    item.bookAmount = newAmount;
+    item = countItemPrice(item);
     return item;
 }
 
@@ -63,8 +59,7 @@ function countItemPrice(item) {
 
 function countSummaryPrice(arr) {
     let summaryPrice = 0;
-    console.log("countSummaryPrice", arr);
-    arr.map(item => summaryPrice + item.booksPrice);
+    arr.map(item => summaryPrice += item.booksPrice);
     return summaryPrice;
 }
 
@@ -72,44 +67,40 @@ const CartReducer = function (state = initialState, action) {
     console.log("cart reducer",action);
     switch (action.type) {
 
-        case GET_ALL_PRODUCTS_IN_CART:
+        case GET_DATA_CART:
             console.log(state);
-            return {...state, products: state.products};
+            return {...state};
 
         case ADD_TO_CART:
             let newState = state;
             let item = getItemById(newState.products, action.book.id);
             if (isInCart(item, action.book.id)) {
-                item = increaseAmount(item,1);
+                item = changeAmount(item, item.bookAmount + 1);
                 item = countItemPrice(item);
-                const index = newState.products.findIndex(f => f.book.id === action.book.id);
+                const index = newState.products.findIndex(item => item.book.id === action.book.id);
                 newState.products[index] = item;   
             } else 
                 newState = { ...newState, products: addNewItem(newState.products, action.book) }
             newState.summary.price = countSummaryPrice(newState.products);
             newState.summary.totalPrice = newState.summary.price + newState.summary.postingPrice;
-            console.log("after add", newState);
-            return newState;
+            return {...newState};
                     
-            
-            
+            case REMOVE_FROM_CART:    
+                state.products = state.products.filter(item => item.book.id != action.bookId);
+                state.summary.price = countSummaryPrice(state.products);
+                state.summary.totalPrice = state.summary.price + state.summary.postingPrice;
+                return {...state};
 
+            case CHANGE_AMOUNT_OF_BOOKS:    
+                const changedItem = changeAmount(getItemById(state.products, action.bookId), action.i);
+                console.log("reducer - changedItem", changedItem);
+                const index = state.products.findIndex(item => item.book.id === action.bookId);
+                state.products[index] = changedItem;
+                state.summary.price = countSummaryPrice(state.products);
+                state.summary.totalPrice = state.summary.price + state.summary.postingPrice;
+                console.log("reducer po zmianie ilosci", state)
+                return {...state};
 
-            // if (czyIstniejeWKoszyku())
-            //     zwiekszNaklad();
-            // else
-            //     dodajNowy();
-            // przeliczKoszyk();
-            // return ...;
-        // case Zmien_naklad:
-            // zmiennaklad();
-            // rzeliczKoszyk();
-        //     // return Object.assign({}, state, {books: state.books})
-        //     return {...state, books: state.books};
-
-        // case GET_BOOK: 
-        //     console.log('homereducer get book', getBookById(state.books, action.bookId))
-        //     return {...state, selectedBook: getBookById(state.books, action.bookId)};
 
         default:
             return state;

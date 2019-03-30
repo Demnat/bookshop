@@ -1,6 +1,7 @@
 import React from 'react';
+import Price from '../Home/Price';
 
-const CartSummary = (summary) => {
+const CartSummary = ({summary}) => {
     
     return (
 
@@ -16,18 +17,18 @@ const CartSummary = (summary) => {
                 <div className="col-sm-12 col-md-6 col-lg-8 col-xl-8">
                     <div className="row shoppingWorth">
                         <h4 className="bookTitle shoppingWorth-header">Wartość zakupów:</h4>
-                        <p className="bookPrice cartSection-productData-price">{summary.price}</p>
+                        <p className="bookPrice cartSection-productData-price"><Price price={summary.price} /></p>
                     </div>
                     <div className="row shoppingWorth">
                         <h4 className="bookTitle shoppingWorth-header">Koszty dostawy:</h4>
-                        <p className="bookPrice cartSection-productData-price">{summary.postingPrice}</p>
+                        <p className="bookPrice cartSection-productData-price"><Price price={summary.postingPrice} /></p>
                     </div>
                 </div>
             </div>
             <div className="container cartSection-pay">
                 <div className="row shoppingWorth">
                     <h4 className="bookTitle shoppingWorth-header">Do zapłaty:</h4>
-                    <p className="bookPrice cartSection-productData-price">{summary.totalPrice}</p>
+                    <p className="bookPrice cartSection-productData-price"><Price price={summary.totalPrice} /></p>
                 </div>
                 <button className="payButton" type="submit">Zapłać</button>
             </div>

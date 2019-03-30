@@ -88,7 +88,6 @@ const Product = (props) => (
                 <p className="labelData productSection-priceDataContainer-labelData">Cena</p>
                 <p className="productPrice"><Price price={props.selectedBook.price} /></p>
             </div>
-            {/* <Link to={'/cart/' + selectedBook.id} className="toCart">Dodaj do koszyka</Link> */}
             <button className="toCart" onClick={() => props.addItemToCart(props.selectedBook)} >Dodaj do koszyka</button>
         </div>
     </div>

@@ -54,11 +54,12 @@ const books = function (state = initialState, action) {
             return {...state, selectedBook: getBookById(state.books, action.bookId)};
 
         case SORT_BOOKS:
+            let booksToSort = {...state};
+            let sortedBooks = booksToSort.books.concat();
             action.sortBy === SORT_TITLE 
-                ? state.books = sortByTitle(state.books, action.sortDirection)
-                : state.books = sortByPrice(state.books, action.sortDirection);
-            console.log("posortowaniu reducer", state.books);    
-            return {...state, books: state.books};
+                ? booksToSort.books = sortByTitle(sortedBooks, action.sortDirection)
+                : booksToSort.books = sortByPrice(sortedBooks, action.sortDirection);    
+            return {...state, books: booksToSort.books};
 
         default:
             return state;

@@ -12,13 +12,13 @@ const SortOptions = (props) => (
                 <button className="leftNavBarOptions leftNavBarMenu-item-link" onClick={() => props.sort(SORT_PRICE, SORT_ASC)} >Cena rosnąco</button>
             </li>
             <li className="leftNavBarMenu-item">
-                <a href="#homeSection" className="leftNavBarOptions leftNavBarMenu-item-link">Cena malejąco</a>
+                <button className="leftNavBarOptions leftNavBarMenu-item-link" onClick={() => props.sort(SORT_PRICE, SORT_DESC)} >Cena malejąco</button>
             </li>
             <li className="leftNavBarMenu-item">
                 <button className="leftNavBarOptions leftNavBarMenu-item-link" onClick={() => props.sort(SORT_TITLE, SORT_ASC)} >Tytuł A-Z</button>
             </li>
             <li className="leftNavBarMenu-item">
-                <a href="#homeSection" className="leftNavBarOptions leftNavBarMenu-item-link">Tytuł Z-A</a>
+                <button className="leftNavBarOptions leftNavBarMenu-item-link" onClick={() => props.sort(SORT_TITLE, SORT_DESC)} >Tytuł Z-A</button>
             </li>
         </ul>
     </div>

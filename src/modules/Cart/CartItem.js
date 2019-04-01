@@ -17,7 +17,7 @@ const CartItem = (props) => {
             <div className="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                 <div className="container amountItem">
                     <input className="amount" type="number" min="1" max="999" 
-                        defaultValue={props.itemAmount} 
+                        value={props.itemAmount} 
                         onChange={(e) => props.changeAmountOfItem(props.item.id, Number(e.target.value))}
                     />
                     <div className="amountButtons">

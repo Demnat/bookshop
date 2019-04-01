@@ -63,6 +63,11 @@ function countSummaryPrice(arr) {
     return summaryPrice;
 }
 
+function countSummary(products, oldSummary) {
+    const sum = countSummaryPrice(products);
+    return {...oldSummary, price:sum, totalPrice: sum + oldSummary.postingPrice};    
+}
+
 const CartReducer = function (state = initialState, action) {
     console.log("cart reducer",action);
     switch (action.type) {
@@ -72,7 +77,7 @@ const CartReducer = function (state = initialState, action) {
             return {...state};
 
         case ADD_TO_CART:
-            let newState = state;
+            let newState = {...state};
             let item = getItemById(newState.products, action.book.id);
             if (isInCart(item, action.book.id)) {
                 item = changeAmount(item, item.bookAmount + 1);
@@ -86,21 +91,20 @@ const CartReducer = function (state = initialState, action) {
             return {...newState};
                     
             case REMOVE_FROM_CART:    
-                state.products = state.products.filter(item => item.book.id != action.bookId);
+                state.products = state.products.filter(item => item.book.id !== action.bookId);
                 state.summary.price = countSummaryPrice(state.products);
                 state.summary.totalPrice = state.summary.price + state.summary.postingPrice;
                 return {...state};
 
             case CHANGE_AMOUNT_OF_BOOKS:    
-                const changedItem = changeAmount(getItemById(state.products, action.bookId), action.i);
-                console.log("reducer - changedItem", changedItem);
-                const index = state.products.findIndex(item => item.book.id === action.bookId);
-                state.products[index] = changedItem;
-                state.summary.price = countSummaryPrice(state.products);
-                state.summary.totalPrice = state.summary.price + state.summary.postingPrice;
-                console.log("reducer po zmianie ilosci", state);
-                return {...state};
-
+                let newAmountState = {...state};
+                let newAmountProducts = newAmountState.products.concat();
+                let newAmountSummary = newAmountState.summary;          
+                const changedItem = changeAmount(getItemById(newAmountProducts, action.bookId), action.i);             
+                const index = newAmountProducts.findIndex(item => item.book.id === action.bookId);
+                newAmountState.products[index] = changedItem;
+                newAmountState.summary = countSummary(newAmountState.products, newAmountSummary);         
+                return {...newAmountState};
 
         default:
             return state;

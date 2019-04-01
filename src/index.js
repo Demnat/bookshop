@@ -17,7 +17,6 @@ import './sass/style.scss';
 import store from './store';
 import { Provider } from 'react-redux';
 
-// import { getAllBooks } from './modules/Home/Home.actions';
 
 class App extends React.Component {
 

@@ -4,9 +4,13 @@
     font: $leftNavBarOptionsFont;
     color: $mainMenuColor;
     text-decoration: none;
+    border: none;
+    background-color: transparent;
+    text-align: left;
 
     &:hover, &:active, .active {
         color: $logoLinkColor;
+        cursor: pointer;
     }
 
     @include media ('>phone','<oldDesktop') {

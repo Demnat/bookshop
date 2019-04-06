@@ -32,7 +32,7 @@ class ProductContainer extends Component {
 
 const mapStateToProps = function (store) {
     return {
-        selectedBook: store.books.selectedBook
+        selectedBook: store.HomeReducer.selectedBook
     };
 };
 

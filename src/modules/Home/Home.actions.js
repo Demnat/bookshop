@@ -1,16 +1,16 @@
-export const GET_ALL_BOOKS = 'GET_ALL_BOOKS';
+export const GET_BOOKS = 'GET_ALL_BOOKS';
 export const GET_BOOK = 'GET_BOOK';
-export const SORT_BOOKS = 'SORT_BOOKS';
+// export const SORT_BOOKS = 'SORT_BOOKS';
 
 //w dalszej kolejności
 export const SEARCH_BOOKS = 'SEARCH_BOOKS';
 export const FILTER_BOOKS = 'FILTER_BOOKS';  // - jakie pole i wartość 
 
-export function getAllBooks() {
-    return {
-        type: GET_ALL_BOOKS
-    }
-}
+// export function getAllBooks() {
+//     return {
+//         type: GET_ALL_BOOKS
+//     }
+// }
 
 export function getBook(bookId) {
     return {
@@ -19,10 +19,19 @@ export function getBook(bookId) {
     }
 }
 
-export function sortBooks(sortBy, sortDirection) {
+export function getBooks(sortBy, sortDirection, currentPage) {
     return {
-        type: SORT_BOOKS,
+        type: GET_BOOKS,
         sortBy,
-        sortDirection
+        sortDirection,
+        currentPage
     }
 }
+
+//  export function sortBooks(sortBy, sortDirection) {
+//      return {
+//          type: GET_ALL_BOOKS,
+//          sortBy,
+//          sortDirection
+//      }
+//  }

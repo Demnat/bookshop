@@ -13,6 +13,9 @@ const Product = (props) => (
                 <div className="col-sm-12 col-md-4 col-lg-4 col-xl-3">
                     {/* <!-- okładka + link do fragmentu książki na pozniej --> */}
                     <div className="homeBook productSection-coverContainer">
+                        { 
+                            props.selectedBook.tag !== "" && <span className={'token'}>{props.selectedBook.tag}</span>
+                        }
                         <a href="#" className="bookContainer">
                             <img className="book"
                                 src={props.selectedBook.imageCover}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import queryString from 'query-string'
 import SortOptions from './SortOptions';
 import BooksList from './BooksList';
-import Pagination from './Pagination';
+import PaginationContainer from './PaginationContainer';
 import * as homeActions from './Home.actions';
 
 class HomeContainer extends Component {
@@ -11,12 +12,15 @@ class HomeContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllBooks();
+        const queryParams = queryString.parse(this.props.location.search);
+        this.props.getBooks(queryParams.sortBy, queryParams.sortDirection, queryParams.currentPage !== undefined ? parseInt(queryParams.currentPage)-1:undefined);
     }
 
     sort = (sortBy, sortDirection) => {
-        this.props.sortBooks(sortBy, sortDirection);
+        this.props.getBooks(sortBy, sortDirection);
     }
+
+    
 
     render() {
         return (
@@ -28,8 +32,12 @@ class HomeContainer extends Component {
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10">
-                        <BooksList books={this.props.books}/>
-                        <Pagination />
+                        <BooksList books = {this.props.books}/>
+                        <PaginationContainer  
+                            currentPage = {this.props.currentPage}
+                            pages = {this.props.pages}
+                            sortData = {this.props.sortData}
+                        />
                     </div>
                 </div>
             </section>
@@ -39,7 +47,10 @@ class HomeContainer extends Component {
 
 const mapStateToProps = function (store) {
     return {
-        books: store.books.books
+        books: store.HomeReducer.books,
+        currentPage: store.HomeReducer.currentPage,
+        pages: store.HomeReducer.pages,
+        sortData: store.HomeReducer.sortData
     };
 };
 

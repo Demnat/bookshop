@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import queryString from 'query-string'
+import { Route } from 'react-router-dom';
 import SortOptions from './SortOptions';
 import BooksList from './BooksList';
 import PaginationContainer from './PaginationContainer';
@@ -12,8 +12,12 @@ class HomeContainer extends Component {
     }
 
     componentDidMount() {
-        const queryParams = queryString.parse(this.props.location.search);
-        this.props.getBooks(queryParams.sortBy, queryParams.sortDirection, queryParams.currentPage !== undefined ? parseInt(queryParams.currentPage)-1:undefined);
+        // const queryParams = queryString.parse(this.props.location.search);
+        // this.props.getBooks(queryParams.sortBy, queryParams.sortDirection, queryParams.currentPage !== undefined ? parseInt(queryParams.currentPage)-1:undefined);
+        const matchParams = this.props.match.params;
+        console.log('matchParams - homeContainer', matchParams);
+        this.props.getBooks(matchParams.sortBy, matchParams.sortDirection, matchParams.currentPage !== undefined ? parseInt(matchParams.currentPage) - 1 : undefined);
+        // this.props.getBooks(this.props.sortData.sortBy, this.props.sortData.sortDirection, this.props.currentPage);
     }
 
     sort = (sortBy, sortDirection) => {
@@ -32,12 +36,14 @@ class HomeContainer extends Component {
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10">
-                        <BooksList books = {this.props.books}/>
+                        <BooksList books = {this.props.books} />
+                            
                         <PaginationContainer  
                             currentPage = {this.props.currentPage}
                             pages = {this.props.pages}
                             sortData = {this.props.sortData}
                         />
+                        <Route exact path={'/:sortBy/:sortDirection/:currentPage'} component={BooksList} />
                     </div>
                 </div>
             </section>

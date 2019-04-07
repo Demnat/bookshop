@@ -5,11 +5,11 @@ const PaginationItem = ( props ) => (
 
     <React.Fragment>
         {(() => {
-            let search = [];
+            let path = [];
             if (props.sortData !== null)
             {
-                search.push("sortBy=" + props.sortData.sortBy);
-                search.push("sortDirection=" + props.sortData.sortDirection);
+                path.push(`${props.sortData.sortBy}`);
+                path.push(`${props.sortData.sortDirection}`);
             }
             
             // if (props.currentPage !== 1) {
@@ -40,12 +40,12 @@ const PaginationItem = ( props ) => (
             //     )
             // } 
             
-            search.push("currentPage=" + props.currentPage);
+            path.push(`${props.currentPage}`);
             return (
                 <NavLink 
                     to={{
-                        pathname: "/",
-                        search: "?" + search.join("&")
+                        pathname: `/` + path.join("/"),
+                        // search: "?" + search.join("&")
                     }}
                     className="pageLink"
                     activeClassName="active">

@@ -5,7 +5,7 @@ const BooksList = ({books}) => {
     return (
     <div className="container homeSection-booksContainer">
         {
-            books.map(book => <BookItem key={book.id} book={book}/>)
+            (books !== undefined)? books.map(book => <BookItem key={book.id} book={book}/>):""
         }
     </div>
     );

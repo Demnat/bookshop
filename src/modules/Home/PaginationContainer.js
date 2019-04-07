@@ -13,6 +13,7 @@ class PaginationContainer extends Component {
         {
             items.push(<PaginationItem 
                 key={i}
+                // currentPage = {i + 1}
                 currentPage = {i + 1}
                 pages = {this.props.pages}
                 sortData = {this.props.sortData} />);

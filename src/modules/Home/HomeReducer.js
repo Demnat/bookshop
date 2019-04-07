@@ -8,7 +8,10 @@ const initialState = {
     currentPage: 0,
     pageBooksAmount: 6,
     pages: 0,
-    sortData: null,
+    sortData: {
+        sortBy: 'price',
+        sortDirection: 'asc'
+    },
 
 };
 
@@ -73,7 +76,7 @@ const HomeReducer = function (state = initialState, action) {
                 books = sortBooks(books, sortActionData.sortBy, sortActionData.sortDirection);
             }
             const pages = Math.ceil(books.length / state.pageBooksAmount);
-            const currentPage = action.currentPage !== undefined ? action.currentPage : 1;
+            const currentPage = action.currentPage !== undefined ? action.currentPage : 0;
             books = paginateBooks(books, state.pageBooksAmount, currentPage);
 
             return {...state, books: books, sortData: sortActionData, pages: pages, currentPage : currentPage};

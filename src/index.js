@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import { MainLayout } from './modules/MainLayout/MainLayout';
 import Home from './modules/Home/HomeContainer';
-import BooksList from './modules/Home/BooksList';
-// import Product from './modules/Product/Product';
 import ProductContainer from './modules/Product/ProductContainer';
 import FAQ from './components/FAQ';
 import Rules from './components/Rules';
@@ -28,7 +25,7 @@ class App extends React.Component {
                 <MainLayout>
                     <Switch>
                         <Route exact path={'/'} component={Home} />
-                        <Route exact path={'/:sortBy/:sortDirection/:currentPage'} component={Home} />
+                        <Route exact path={'/:sortBy/:sortDirection/:currentPage'} component={Home} />     
                         <Route exact path={'/product/:bookId'} component={ProductContainer} /> 
                         <Route exact path={'/faq'} component={FAQ} />
                         <Route exact path={'/rules'} component={Rules} />

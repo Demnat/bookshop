@@ -11,45 +11,27 @@ const PaginationItem = ( props ) => (
                 path.push(`${props.sortData.sortBy}`);
                 path.push(`${props.sortData.sortDirection}`);
             }
-            
-            // if (props.currentPage !== 1) {
-            //     search.push("currentPage=1");
-            //     return (
-            //         <NavLink to={{
-            //             pathname: "/",
-            //             search: "?" + search.join("&")
-            //         }}
-            //             className="pageLink"
-            //             activeClassName="active">
-            //                 <i class="fas fa-arrow-left"></i>
-            //         </NavLink>
-            //     )
-            // }
-            // if (props.currentPage !== props.pages) {
-            //     search.push("currentPage=" + props.pages);
-            //     return (
-            //         <NavLink 
-            //             to={{
-            //                 pathname: "/",
-            //                 search: "?" + search.join("&")
-            //             }}
-            //             className="pageLink"
-            //             activeClassName="active">
-            //                 <i class="fas fa-arrow-right"></i>
-            //         </NavLink>
-            //     )
-            // } 
-            
-            path.push(`${props.currentPage}`);
+            path.push(props.currentPage);
+            let rend;
+            if (props.firstArrow !== undefined)
+            {
+                rend = () => <i className="fas fa-arrow-left"></i>;
+            }
+            else if (props.lastArrow !== undefined)
+            {
+                rend = () => <i className="fas fa-arrow-right"></i>;
+            }
+            else{
+                rend = () => props.currentPage;
+            }
             return (
                 <NavLink 
                     to={{
                         pathname: `/` + path.join("/"),
-                        // search: "?" + search.join("&")
-                    }}
+                        }}
                     className="pageLink"
                     activeClassName="active">
-                        {props.currentPage}
+                        {rend()}
                 </NavLink>
             )
             

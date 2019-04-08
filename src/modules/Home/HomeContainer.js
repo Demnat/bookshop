@@ -13,21 +13,26 @@ class HomeContainer extends Component {
     componentWillMount() {
         const matchParams = this.props.match.params;
         console.log('homecontainer - matchParams - componentWillMount', matchParams);
-        this.props.getBooks(matchParams.sortBy, matchParams.sortDirection, matchParams.currentPage !== undefined ? parseInt(matchParams.currentPage) - 1 : undefined);
+        this.props.getBooks(matchParams.sortBy, matchParams.sortDirection, matchParams.currentPage !== undefined 
+            ? parseInt(matchParams.currentPage) - 1 
+            : undefined);
     }
 
     sort = (sortBy, sortDirection) => {
         this.props.getBooks(sortBy, sortDirection);
     }
-    componentDidUpdate(prevProps,prevState, snapshot)
-    {
+
+    componentDidUpdate(prevProps,prevState, snapshot) {
         console.log('matchParams - componentDidUpdate', this.props.location,prevProps.location);
-        if (prevProps.location.pathname !== this.props.location.pathname){
+        if (prevProps.location.pathname !== this.props.location.pathname) {
             const matchParams = this.props.match.params;
             console.log('componentDidUpdate - firing getbooks', prevProps.location);
-            this.props.getBooks(matchParams.sortBy, matchParams.sortDirection, matchParams.currentPage !== undefined ? parseInt(matchParams.currentPage) - 1 : undefined);
+            this.props.getBooks(matchParams.sortBy, matchParams.sortDirection, matchParams.currentPage !== undefined 
+                ? parseInt(matchParams.currentPage) - 1 
+                : undefined);
         }
     }
+
     render() {
         console.log("homecontainer - render");
         return (

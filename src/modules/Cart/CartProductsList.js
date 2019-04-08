@@ -24,7 +24,8 @@ const CartProductsList = (props) => {
                                                 key={item.book.id} 
                                                 item={item.book} 
                                                 itemAmount={item.bookAmount} 
-                                                itemsPrice={item.booksPrice} 
+                                                itemsPrice={item.booksPrice}
+                                                itemsOldPrice={item.oldBooksPrice} 
                                                 removeItem={props.removeItemFromCart}
                                                 changeAmountOfItem={props.changeAmountOfBooksInCart} 
                                             />)

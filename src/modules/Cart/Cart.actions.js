@@ -5,9 +5,7 @@ export const CHANGE_AMOUNT_OF_BOOKS = 'CHANGE_AMOUNT_OF_BOOKS';
 export const TOTAL_CART = 'TOTAL_CART';
 export const ADD_DISCOUNT = 'ADD_DISCOUNT';
 
-
-//w dalszej kolejności
-// opcje rabatów
+//w dalszej kolejności:
 // opcje dostawy
 // waga przesyłki
 // dane do wysyłki itd.
@@ -33,10 +31,17 @@ export function removeFromCart(bookId) {
 }
 
 export function changeAmountOfBooks(bookId, i) {
-    return {
+   return {
         type: CHANGE_AMOUNT_OF_BOOKS,
         bookId,
         i
+    }  
+}
+
+export function addDiscount(code) {
+    return {
+        type:ADD_DISCOUNT,
+        code
     }
 }
 

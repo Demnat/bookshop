@@ -24,6 +24,10 @@ class CartContainer extends Component {
         this.props.changeAmountOfBooks(itemId, value);
     }
 
+    addDiscountToCart = code => {
+        this.props.addDiscount(code);
+    }
+
     render() {
         return (
             <section className="container cartSection">
@@ -59,7 +63,7 @@ class CartContainer extends Component {
                                 removeItemFromCart={this.removeItemFromCart}
                                 changeAmountOfBooksInCart={this.changeAmountOfBooksInCart} 
                             /> 
-                            <CartSummary summary={this.props.summary} />
+                            <CartSummary summary={this.props.summary} addDiscountToCart={this.addDiscountToCart} discount={this.props.discount} />
                         </div>
                     }
 
@@ -72,6 +76,7 @@ const mapStateToProps = function (store) {
     return {
         products: store.CartReducer.products,
         summary: store.CartReducer.summary,
+        discount: store.CartReducer.discount
     };
 };
 

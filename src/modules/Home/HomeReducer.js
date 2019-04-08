@@ -6,7 +6,7 @@ const initialState = {
     books: booksData,
     selectedBook: {},
     currentPage: 0,
-    pageBooksAmount: 2,
+    pageBooksAmount: 3,
     pages: 0,
     sortData: {
         sortBy: 'price',

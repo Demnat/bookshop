@@ -3,4 +3,9 @@
     display: block;
     font: $titleBookFont;
     color: $mainMenuColor;
+
+    &--oldPrice {
+        text-align: center;
+        text-decoration: $logoLinkHoverColor line-through;
+    }
 }

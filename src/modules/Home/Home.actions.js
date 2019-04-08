@@ -28,6 +28,9 @@ export function getBooks(sortBy, sortDirection, currentPage) {
     }
 }
 
+
+
+
 //  export function sortBooks(sortBy, sortDirection) {
 //      return {
 //          type: GET_ALL_BOOKS,

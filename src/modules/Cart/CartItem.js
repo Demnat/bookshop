@@ -28,7 +28,10 @@ const CartItem = (props) => {
             </div>
             <div className="col-sm-12 col-md-2 col-lg-1 col-xl-1">
                 {/* cena do wyliczenia w zależności od ilości - wyliczona w reducerze*/}
-                <p className="bookPrice cartSection-productData-price"><Price price={props.itemsPrice} /></p>  
+                <p className="bookPrice cartSection-productData-price">
+                    <Price price={props.itemsPrice} />
+                    {(props.itemsOldPrice !== props.itemsPrice)&&<sub className="bookPrice--oldPrice"><br /><Price price={props.itemsOldPrice} /></sub>}
+                </p>  
             </div>
             <div className="col-sm-12 col-md-1 col-lg-1 col-xl-1">
                 {/* poprawić style z a na button */}

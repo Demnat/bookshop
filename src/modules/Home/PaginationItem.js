@@ -6,22 +6,19 @@ const PaginationItem = ( props ) => (
     <React.Fragment>
         {(() => {
             let path = [];
-            if (props.sortData !== null)
-            {
+            if (props.sortData !== null) {
                 path.push(`${props.sortData.sortBy}`);
                 path.push(`${props.sortData.sortDirection}`);
             }
             path.push(props.currentPage);
             let rend;
-            if (props.firstArrow !== undefined)
-            {
+            if (props.firstArrow !== undefined) {
                 rend = () => <i className="fas fa-arrow-left"></i>;
             }
-            else if (props.lastArrow !== undefined)
-            {
+            else if (props.lastArrow !== undefined) {
                 rend = () => <i className="fas fa-arrow-right"></i>;
             }
-            else{
+            else {
                 rend = () => props.currentPage;
             }
             return (
@@ -33,8 +30,7 @@ const PaginationItem = ( props ) => (
                     activeClassName="active">
                         {rend()}
                 </NavLink>
-            )
-            
+            )    
         })()}
     </React.Fragment>
 )

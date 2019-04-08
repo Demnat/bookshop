@@ -1,8 +1,8 @@
 import React from 'react';
 import Price from '../Home/Price';
-
-const CartSummary = ({summary}) => {
-    
+import CartDiscountErrorMessage from './CartDiscountErrorMessage'
+const CartSummary = (props) => {
+    console.log(props);
     return (
 
         <div className="container">
@@ -10,25 +10,26 @@ const CartSummary = ({summary}) => {
                 <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                     <form className="discount">
                         <h4 className="bookTitle">Kod rabatowy:</h4>
-                        <input type="text" className="discountCode" />
-                        <button className="discountButton" type="submit">Zastosuj</button>
+                        <CartDiscountErrorMessage discount={props.discount} />
+                        <input type="text" className="discountCode" id="code" />
+                        <button className="discountButton" type="button" onClick={() => props.addDiscountToCart(document.getElementById('code').value)} >Zastosuj</button>
                     </form>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-8 col-xl-8">
                     <div className="row shoppingWorth">
                         <h4 className="bookTitle shoppingWorth-header">Wartość zakupów:</h4>
-                        <p className="bookPrice cartSection-productData-price"><Price price={summary.price} /></p>
+                        <p className="bookPrice cartSection-productData-price"><Price price={props.summary.price} /></p>
                     </div>
                     <div className="row shoppingWorth">
                         <h4 className="bookTitle shoppingWorth-header">Koszty dostawy:</h4>
-                        <p className="bookPrice cartSection-productData-price"><Price price={summary.postingPrice} /></p>
+                        <p className="bookPrice cartSection-productData-price"><Price price={props.summary.postingPrice} /></p>
                     </div>
                 </div>
             </div>
             <div className="container cartSection-pay">
                 <div className="row shoppingWorth">
                     <h4 className="bookTitle shoppingWorth-header">Do zapłaty:</h4>
-                    <p className="bookPrice cartSection-productData-price"><Price price={summary.totalPrice} /></p>
+                    <p className="bookPrice cartSection-productData-price"><Price price={props.summary.totalPrice} /></p>
                 </div>
                 <button className="payButton" type="submit">Zapłać</button>
             </div>

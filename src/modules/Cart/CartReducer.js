@@ -1,8 +1,9 @@
-import { GET_DATA_CART, ADD_TO_CART, REMOVE_FROM_CART, CHANGE_AMOUNT_OF_BOOKS } from './Cart.actions';
-
+import { GET_DATA_CART, ADD_TO_CART, REMOVE_FROM_CART, CHANGE_AMOUNT_OF_BOOKS, ADD_DISCOUNT } from './Cart.actions';
+import { isValidCodeForCart, addDiscountToCart } from '../../data/discount';
 
 const initialState = {
     products: [],
+    discount: null,
     summary: {
          price: 0,  
          postingPrice: 13.99,
@@ -46,7 +47,8 @@ function addNewItem(arr, item) {
     const newItem = {
         book: item,
         bookAmount: 1,
-        booksPrice: item.price
+        booksPrice: item.price,
+        oldBooksPrice : item.price
     };
     arr.push(newItem);
     return arr;
@@ -54,18 +56,30 @@ function addNewItem(arr, item) {
 
 function countItemPrice(item) { 
     item.booksPrice = item.book.price * item.bookAmount;
+    item.oldBooksPrice = item.booksPrice;
     return item;
 }
 
 function countSummaryPrice(arr) {
     let summaryPrice = 0;
-    arr.map(item => summaryPrice += item.booksPrice);
-    return summaryPrice;
+    let oldSummaryPrice = 0;
+    arr.map(item => {
+        summaryPrice += item.booksPrice;
+        oldSummaryPrice += item.oldBooksPrice;
+    });
+    return {
+        summaryPrice,
+        oldSummaryPrice
+    };
 }
 
 function countSummary(products, oldSummary) {
     const sum = countSummaryPrice(products);
-    return {...oldSummary, price:sum, totalPrice: sum + oldSummary.postingPrice};    
+    return {...oldSummary,
+         price:sum.summaryPrice, 
+         totalPrice: sum.summaryPrice + oldSummary.postingPrice,
+         discount: sum.oldSummaryPrice - sum.summaryPrice
+    };
 }
 
 const CartReducer = function (state = initialState, action) {
@@ -85,27 +99,43 @@ const CartReducer = function (state = initialState, action) {
                 const index = newState.products.findIndex(item => item.book.id === action.book.id);
                 newState.products[index] = item;   
             } else 
-                newState = { ...newState, products: addNewItem(newState.products, action.book) }
-            newState.summary.price = countSummaryPrice(newState.products);
-            newState.summary.totalPrice = newState.summary.price + newState.summary.postingPrice;
-            return {...newState};
+                newState = { ...newState, products: addNewItem(newState.products, action.book) };
+            if (newState.discount !== null && newState.discount.isValid ) {
+                newState = addDiscountToCart(newState.discount.code, newState);
+            }
+            return {...newState, summary:countSummary(newState.products, newState.summary)};
                     
-            case REMOVE_FROM_CART:    
-                state.products = state.products.filter(item => item.book.id !== action.bookId);
-                state.summary.price = countSummaryPrice(state.products);
-                state.summary.totalPrice = state.summary.price + state.summary.postingPrice;
-                return {...state};
+        case REMOVE_FROM_CART:    
+            state.products = state.products.filter(item => item.book.id !== action.bookId);
+            if (state.discount !== null ) {
+                state = addDiscountToCart(state.discount.code, state);
+            }
+            state.summary = countSummary(state.products, state.summary);         
+            return {...state};
 
-            case CHANGE_AMOUNT_OF_BOOKS:    
-                let newAmountState = {...state};
+        case CHANGE_AMOUNT_OF_BOOKS:    
+            let newAmountState = {...state};
+            if (action.i > 0 && action.i < 100) {
                 let newAmountProducts = newAmountState.products.concat();
                 let newAmountSummary = newAmountState.summary;          
                 const changedItem = changeAmount(getItemById(newAmountProducts, action.bookId), action.i);             
                 const index = newAmountProducts.findIndex(item => item.book.id === action.bookId);
                 newAmountState.products[index] = changedItem;
+                if (newAmountState.discount !== null) {
+                    newAmountState = addDiscountToCart(newAmountState.discount.code, newAmountState);
+                }
                 newAmountState.summary = countSummary(newAmountState.products, newAmountSummary);         
-                return {...newAmountState};
+            }
+            return {...newAmountState};
 
+        case ADD_DISCOUNT:
+            let cart = {...state};
+            cart = isValidCodeForCart(action.code, cart);
+            if (cart.discount.isValid) {
+                cart = addDiscountToCart(action.code, cart);
+            }
+            return {...cart, discount: cart.discount, summary: countSummary(cart.products, cart.summary)};
+        
         default:
             return state;
     }   

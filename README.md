@@ -2,7 +2,7 @@
 https://bookshop-646da.firebaseapp.com/
 
 ## Link to last commit
-
+https://github.com/Demnat/bookshop/commit/a64d405da56b959ecfdeaab786a2325b6c11fef9
 
 ## Install
 npm install

@@ -8,6 +8,7 @@ import FAQ from './components/FAQ';
 import Rules from './components/Rules';
 import Contact from './components/Contact';
 import CartContainer from './modules/Cart/CartContainer';
+import Summary from './modules/Summary/Summary';
 import NotFound from './components/NotFound';
 
 import './sass/style.scss';
@@ -31,6 +32,7 @@ class App extends React.Component {
                         <Route exact path={'/rules'} component={Rules} />
                         <Route exact path={'/contact'} component={Contact} />
                         <Route exact path={'/cart'} component={CartContainer} />
+                        <Route exact path={'/summary'} component={Summary} />
                         <Route path='*' component={NotFound} />
                     </Switch>
                 </MainLayout>

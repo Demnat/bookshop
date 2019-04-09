@@ -5,7 +5,7 @@ const CartDiscountErrorMessage = (props) => (
     <React.Fragment>
         {(() => {
             console.log(props);
-            if (props.discount == undefined || props.discount.isValid === undefined || props.discount.isValid) {
+            if (props.discount === undefined || props.discount == null || props.discount.isValid === undefined || props.discount.isValid) {
                     return null;
                 } 
                 return (

@@ -4,6 +4,7 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const CHANGE_AMOUNT_OF_BOOKS = 'CHANGE_AMOUNT_OF_BOOKS';
 export const TOTAL_CART = 'TOTAL_CART';
 export const ADD_DISCOUNT = 'ADD_DISCOUNT';
+export const RESET_DATA_CART = 'RESET_DATA_CART';
 
 //w dalszej kolejności:
 // opcje dostawy
@@ -45,4 +46,8 @@ export function addDiscount(code) {
     }
 }
 
-
+export function resetDataCart() {
+    return {
+        type: RESET_DATA_CART
+    }
+}

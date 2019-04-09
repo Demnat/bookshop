@@ -2,7 +2,7 @@ import React from 'react';
 import Price from '../Home/Price';
 import CartDiscountErrorMessage from './CartDiscountErrorMessage'
 const CartSummary = (props) => {
-    console.log(props);
+    console.log("cart summary", props);
     return (
 
         <div className="container">
@@ -31,7 +31,7 @@ const CartSummary = (props) => {
                     <h4 className="bookTitle shoppingWorth-header">Do zapłaty:</h4>
                     <p className="bookPrice cartSection-productData-price"><Price price={props.summary.totalPrice} /></p>
                 </div>
-                <button className="payButton" type="submit">Zapłać</button>
+                <button className="payButton" type="button" onClick={() => props.goToSummary(props.products, props.summary)}>Zapłać</button>
             </div>
         </div>
         

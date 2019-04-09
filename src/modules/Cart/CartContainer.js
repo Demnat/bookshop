@@ -28,12 +28,14 @@ class CartContainer extends Component {
         this.props.addDiscount(code);
     }
 
+    goToSummary = () => {
+        this.props.history.push('/summary');
+    }
+
     render() {
         return (
             <section className="container cartSection">
                 <h6 className="leftNavBarHeader cartSection-header">Koszyk</h6>
-                {console.log(this.props.products.length)}
-                
                     {/* {(() => {if (this.props.products.length === 0){
                      return(   <h4 className="bookTitle">Koszyk jest pusty!
                             <Link exact to="/" className="bookTitle" >
@@ -63,7 +65,13 @@ class CartContainer extends Component {
                                 removeItemFromCart={this.removeItemFromCart}
                                 changeAmountOfBooksInCart={this.changeAmountOfBooksInCart} 
                             /> 
-                            <CartSummary summary={this.props.summary} addDiscountToCart={this.addDiscountToCart} discount={this.props.discount} />
+                            <CartSummary 
+                                summary={this.props.summary} 
+                                addDiscountToCart={this.addDiscountToCart} 
+                                discount={this.props.discount}
+                                products={this.props.products} 
+                                goToSummary={this.goToSummary}
+                            />
                         </div>
                     }
 

@@ -1,4 +1,4 @@
-import { GET_DATA_CART, ADD_TO_CART, REMOVE_FROM_CART, CHANGE_AMOUNT_OF_BOOKS, ADD_DISCOUNT } from './Cart.actions';
+import { GET_DATA_CART, ADD_TO_CART, REMOVE_FROM_CART, CHANGE_AMOUNT_OF_BOOKS, ADD_DISCOUNT, RESET_DATA_CART } from './Cart.actions';
 import { isValidCodeForCart, addDiscountToCart } from '../../data/discount';
 
 const initialState = {
@@ -63,7 +63,7 @@ function countItemPrice(item) {
 function countSummaryPrice(arr) {
     let summaryPrice = 0;
     let oldSummaryPrice = 0;
-    arr.map(item => {
+    arr.forEach(item => {
         summaryPrice += item.booksPrice;
         oldSummaryPrice += item.oldBooksPrice;
     });
@@ -136,6 +136,20 @@ const CartReducer = function (state = initialState, action) {
             }
             return {...cart, discount: cart.discount, summary: countSummary(cart.products, cart.summary)};
         
+        case RESET_DATA_CART:
+            let resetState = {...state};  
+            resetState =  {
+                    products: [],
+                    discount: null,
+                    summary: {
+                        price: 0,  
+                        postingPrice: 13.99,
+                        discount: 0,
+                        totalPrice: 0
+                    }
+                };
+            return  {...resetState};
+
         default:
             return state;
     }   

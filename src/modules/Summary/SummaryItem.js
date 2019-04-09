@@ -1,7 +1,7 @@
 import React from 'react';
 import Price from '../Home/Price';
 
-const CartItem = (props) => {
+const SummaryItem = (props) => {
     return (
 
         <div className="row cartSection-productData">
@@ -18,26 +18,19 @@ const CartItem = (props) => {
                 <div className="container amountItem">
                     <input className="amount" type="number" min="1" max="999" 
                         value={props.itemAmount} 
-                        onChange={(e) => props.changeAmountOfItem(props.item.id, Number(e.target.value))}
+                        disabled
                     />
-                    <div className="amountButtons">
-                        <button className="amountButton" onClick={() => props.changeAmountOfItem(props.item.id, props.itemAmount + 1)}>+</button>
-                        <button className="amountButton" onClick={() => props.changeAmountOfItem(props.item.id, props.itemAmount - 1)}>-</button>
-                    </div>
                 </div>
             </div>
-            <div className="col-sm-12 col-md-2 col-lg-1 col-xl-1">
+            <div className="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                 <p className="bookPrice cartSection-productData-price">
                     <Price price={props.itemsPrice} />
                     {(props.itemsOldPrice !== props.itemsPrice)&&<sub className="bookPrice--oldPrice"><br /><Price price={props.itemsOldPrice} /></sub>}
                 </p>  
-            </div>
-            <div className="col-sm-12 col-md-1 col-lg-1 col-xl-1">
-                <button className="footerMenuLink" onClick={() => props.removeItem(props.item.id)}><i className="far fa-trash-alt removeProduct"></i></button>
             </div>
         </div>
         
     );
 }
 
-export default CartItem;
+export default SummaryItem;
